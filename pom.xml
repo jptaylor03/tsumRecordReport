@@ -4,6 +4,7 @@
   <artifactId>tsumRecordReport</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Tsum (Hearts) Record Report</name>
+  <description>A tool to help visualize which Tsum friends have sent you hearts.</description>
   
   <properties>
 	<main.class>thr.controller.Main</main.class>

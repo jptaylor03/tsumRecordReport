@@ -30,4 +30,7 @@ public class MavenProperties {
     public static String obtainName() {
     	return (String)obtainProperties().get("name");
     }
+    public static String obtainDescription() {
+    	return (String)obtainProperties().get("description");
+    }
 }
