@@ -322,7 +322,7 @@ public class Main {
 						}
 					}
 				}
-				logger.info("Procesed friend data (size=" + friends.size() + ").");
+				logger.info("Processed friend data (size=" + friends.size() + ").");
 			} else {
 				logger.warn("No friend data found.");
 			}
