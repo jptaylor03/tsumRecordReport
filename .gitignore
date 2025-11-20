@@ -1,0 +1,11 @@
+/.apt_generated/
+/.settings/
+/bin/
+/build/
+/target/
+/logs/
+.classpath
+.factorypath
+.jsdtscope
+.project
+.tern-project
