@@ -37,7 +37,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.SheetConditionalFormatting;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
@@ -45,6 +44,7 @@ import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFPicture;
 import org.apache.poi.xssf.usermodel.XSSFShape;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.xmlbeans.XmlCursor;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet;
 
@@ -178,7 +178,7 @@ public class Main {
 					FRIEND_IMAGE_FILES = TSUM_RECORD_DIR.listFiles(new FilenameFilter() {
 						public boolean accept(File dir, String name) {
 			                return name.endsWith(".png");
-			            }						
+			            }
 					});
 					if (FRIEND_IMAGE_FILES == null || FRIEND_IMAGE_FILES.length == 0) {
 						logger.error("'Friend' image files cannot be found in the specified folder.\n" + COMMON_HELP_MSG);
@@ -201,7 +201,7 @@ public class Main {
 				logger.info("Processing existing XLS file (" + xlsFile.getName() + ").");
 				// ..open/load it if it already exists
 				FileInputStream fis = new FileInputStream(xlsFile);
-				workbook = WorkbookFactory.create(fis);
+				workbook = new XSSFWorkbook(fis);
 				fis.close();
 				formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
 				Sheet worksheet = workbook.getSheet(Sheets.SHEET0.label);
@@ -376,7 +376,7 @@ public class Main {
 	}
 
 	private Workbook createWorkbook(List<Friend> friends) throws IOException, FileNotFoundException {
-		Workbook workbook = WorkbookFactory.create(true);
+		XSSFWorkbook workbook = new XSSFWorkbook();
 		// Sheet 0: record.txt (with mapping to friend names)
 		Sheet[] worksheet = { null, null };
 		worksheet[0] = workbook.createSheet(Sheets.SHEET0.label);
