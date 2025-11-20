@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -307,7 +308,7 @@ public class Main {
 							}
 							friend.setName(friendName);
 							if (StringUtils.isBlank(friendName)) {
-								logger.warn("Empty friend name: " + friendName + " (from " + text + ")");
+								logger.warn("Empty friend name: " + friendName + " (from " + ArrayUtils.toString(text) + ")");
 							}
 						} else {
 							logger.warn("Could not determine friend name: " + friend.getId());
