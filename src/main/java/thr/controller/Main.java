@@ -289,6 +289,7 @@ public class Main {
 					} else {
 						imageFile = new File(TSUM_RECORD_DIR, friend.getId());
 						// Scrape text from image
+						// TODO Prevent OCR info-level messages from displaying on console
 						// TODO Narrow area of OCR scan to make results more accurate
 //						images = new OcrInput(InputType.SingleImage);
 //						images.add(imageFile.getAbsolutePath());
