@@ -302,7 +302,14 @@ public class Main {
 //						}
 						String[] text = (result == null?null:result.split("\n"));
 						if (text != null && text.length > 1) {
-							friendName = StringUtils.defaultIfEmpty(text[1], StringUtils.EMPTY);
+							// Ignore first and last elements, but concatenate all other non-blank values
+							friendName = StringUtils.EMPTY;
+							for (int z = 0 + 1; z < text.length - 1; z++) {
+								if (StringUtils.isNotBlank(text[z])) {
+									friendName += text[z];
+									break;
+								}
+							}
 							if (REMOVE_TRAILING_ELLIPSE && friendName.endsWith(ELLIPSE)) {
 								friendName = friendName.substring(0, friendName.length() - ELLIPSE.length());
 							}
