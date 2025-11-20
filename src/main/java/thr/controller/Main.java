@@ -1,6 +1,7 @@
 package thr.controller;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -268,9 +269,11 @@ public class Main {
 			if (!friends.isEmpty()) {
 				logger.info("Processing friend data (size=" + friends.size() + ").");
 				// Initialize OCR engine
+//				// ..Using Aspose
 //				AsposeOCR api = new AsposeOCR();
 //				OcrInput images  = null;
 //				ArrayList<RecognitionResult> results = null;
+				// ..Using Tesseract
 				// TODO Allow OCR scanning to be optional
 				Tesseract tesseract = new Tesseract();
 				// TODO Externalize Tesseract configuration
@@ -290,21 +293,25 @@ public class Main {
 					} else {
 						imageFile = new File(TSUM_RECORD_DIR, friend.getId());
 						// Scrape text from image
-						// TODO Prevent OCR info-level messages from displaying on console
-						// TODO Narrow area of OCR scan to make results more accurate
+//						// ..Using Aspose
 //						images = new OcrInput(InputType.SingleImage);
 //						images.add(imageFile.getAbsolutePath());
 //						results = api.Recognize(images);
-						String result = tesseract.doOCR(imageFile);				
-						// for friends name
 //						if (results != null && results.size() > 0) {
 //							friend.setName(results.get(1).recognitionText);
 //						}
+						// ..Using Tesseract
+						// Narrow area of OCR scan (to make results more accurate)
+						List<Rectangle> scanAreas = new ArrayList<Rectangle>();
+						scanAreas.add(new Rectangle(90, 22, 215, 45));
+						// Perform OCR scan
+						// TODO Prevent OCR info-level messages from displaying on console
+						String result = tesseract.doOCR(imageFile, scanAreas);				
 						String[] text = (result == null?null:result.split("\n"));
 						if (text != null && text.length > 1) {
-							// Ignore first and last elements, but concatenate all other non-blank values
+							// Concatenate all non-blank values
 							friendName = StringUtils.EMPTY;
-							for (int z = 0 + 1; z < text.length - 1; z++) {
+							for (int z = 0; z < text.length; z++) {
 								if (StringUtils.isNotBlank(text[z])) {
 									friendName += text[z];
 									break;
