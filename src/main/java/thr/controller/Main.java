@@ -356,10 +356,10 @@ public class Main {
 						totalReceived += receivedCount.getValue();
 					}
 					sb.append("\t\t\t<tr>");
+					sb.append("<td>" + friend.getName() + "</td>");
 					sb.append("<td>" + (x+1) + "</td>");
 					sb.append("<td>" + friend.getId() + "</td>");
 					sb.append("<td><img src='" + friend.getId() + "'/></td>");
-					sb.append("<td>" + friend.getName() + "</td>");
 					sb.append("<td>" + friend.getLastReceiveTime() + "<br/>(" + friend.getLastReceivedDate() + ")" + "</td>");
 					sb.append("<td>" + totalReceived + "</td>");
 					sb.append("</tr>");
